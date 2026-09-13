@@ -1,0 +1,50 @@
+[project]
+name = "aii601"
+version = "0.1.0"
+description = "AII601 (FA26) course environment"
+requires-python = ">=3.12,<3.13"
+
+# Everything a student needs to run every notebook in this course.
+# `notebook` and `ipykernel` are deliberately *project* dependencies: that way
+# `uv run jupyter notebook` launches Jupyter from inside .venv/, so its built-in
+# "python3" kernel already has all of these packages. No kernel registration,
+# no `ipython kernel install`, nothing for a student to get wrong.
+#
+# `notebook` is Notebook 7 -- the streamlined one-notebook-per-tab interface.
+# It pulls in jupyterlab as a dependency, so `jupyter lab` also works if you
+# ever want the full IDE-style view (`make lab`).
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "pillow",
+    "shapely",
+    "sortedcontainers",
+    "notebook",
+    "ipykernel",
+    "ipympl>=0.10.0",
+]
+
+# A friendlier name for `jupyter notebook`, so the launch command says what it
+# does and there is no chance of running some other Jupyter:
+#
+#   uv run launch-assignment-notebooks
+#
+# This is a plain alias -- it points straight at the console entry point that
+# the `notebook` package already provides. Extra arguments pass through, so
+# `uv run launch-assignment-notebooks --port 9000` works.
+#
+# `uv run jupyter notebook` remains equivalent and is fine to use.
+[project.scripts]
+launch-assignment-notebooks = "notebook.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# This project ships no source code -- it exists only to declare the environment
+# and the alias above, so that a single pyproject.toml is the whole handout.
+# bypass-selection tells hatchling to build a metadata-only wheel instead of
+# looking for a package directory to include.
+[tool.hatch.build.targets.wheel]
+bypass-selection = true

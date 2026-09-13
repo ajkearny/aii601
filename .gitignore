@@ -1,0 +1,13 @@
+# uv-managed virtual environment (recreate with `uv sync`)
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Assignment build artifacts (P1.4 CGAL container)
+results/
+.docker-image.stamp
