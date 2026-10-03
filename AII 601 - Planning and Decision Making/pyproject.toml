@@ -23,6 +23,7 @@ dependencies = [
     "notebook",
     "ipykernel",
     "ipympl>=0.10.0",
+    "ortools>=9.15.6755",
 ]
 
 # A friendlier name for `jupyter notebook`, so the launch command says what it
