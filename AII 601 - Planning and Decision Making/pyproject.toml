@@ -24,6 +24,11 @@ dependencies = [
     "ipykernel",
     "ipympl>=0.10.0",
     "ortools>=9.15.6755",
+    "torch>=2.15.0",
+    "gymnasium>=1.4.0",
+    "pygame>=2.6.1",
+    "stable-baselines3>=2.9.2",
+    "pandas>=3.0.6",
 ]
 
 # A friendlier name for `jupyter notebook`, so the launch command says what it
@@ -49,3 +54,12 @@ build-backend = "hatchling.build"
 # looking for a package directory to include.
 [tool.hatch.build.targets.wheel]
 bypass-selection = true
+
+# CPU-only PyTorch (no GPU in this environment; avoids multi-GB CUDA wheels)
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
